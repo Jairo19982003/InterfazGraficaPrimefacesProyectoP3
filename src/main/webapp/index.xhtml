@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>PORTAFOLIO</title>
+    <h:outputStylesheet library="css" name="styles.css"/>
+
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFFFFF; /* Blanco */
+            color: #424242; /* Gris oscuro */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Estilos para el encabezado */
+        .big-title {
+            color: #1A237E; /* Azul oscuro */
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .highlight {
+            color: #FFEB3B; /* Amarillo */
+        }
+
+        /* Estilos para las tarjetas */
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 300px;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header p {
+            margin: 0;
+        }
+
+        .card-header strong {
+            font-weight: bold;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .description {
+            margin-top: 10px;
+        }
+
+        .description p {
+            margin: 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Estilos para el formulario de comentarios */
+        .comment-section {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #1A237E; /* Azul oscuro */
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #BDBDBD; /* Gris claro */
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .send-button button {
+            background-color: #4CAF50; /* Verde */
+            color: #FFFFFF; /* Blanco */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Estilos para la barra de navegación */
+        .menubar {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .menubar a {
+            color: #2196F3; /* Azul claro */
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid #2196F3; /* Azul claro */
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .menubar a:hover {
+            background-color: #2196F3; /* Azul claro */
+            color: #FFFFFF; /* Blanco */
+        }
+
+        /* Estilos para las secciones de texto */
+        .text-section {
+            margin-top: 50px;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            color: #1A237E; /* Azul oscuro */
+            margin-bottom: 10px;
+        }
+
+        .section-text {
+            color: #424242; /* Gris oscuro */
+        }
+
+        /* Separador */
+        .separator {
+            height: 2px;
+            background-color: #BDBDBD; /* Gris claro */
+            margin: 20px 0;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <h1 class="big-title">Portafolio <span class="highlight">Webstart</span></h1>
+    <div class="separator"></div>
+
+    <!-- Container for cards to be displayed horizontally -->
+    <div class="card-container">
+        <ui:repeat value="#{commentaryBean.projectos}" var="projecto">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <p>Nombre del Proyecto: <strong>#{projecto.name}</strong></p>
+                            <p>Administrador: <strong>#{projecto.author}</strong></p>
+                        </div>
+                        <div>
+                            <p><strong>#{projecto.date}</strong></p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="description">
+                            <p>#{projecto.language}</p>
+                        </div>
+                    </div>
+                </div>
+        </ui:repeat>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Comment Section -->
+    <div class="comment-section">
+        <h2>Dejar un Comentario</h2>
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name"/>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email"/>
+
+        <label for="projecto">Proyecto que desea comentar:</label>
+        <input type="text" id="projecto" name="projecto"/>
+
+        <label for="comment">Comentario:</label>
+        <textarea id="comment" name="comment" cols="" rows=""></textarea>
+
+        <div class="send-button">
+            <button type="submit">
+                <span>&#10148;</span> <!-- Unicode character for the arrow -->
+            </button>
+        </div>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- Pagination Menubar -->
+    <div class="menubar">
+        <a href="#">Comentarios recientes</a>
+    </div>
+
+    <div class="separator"></div>
+    <h3 class="big-title">ACERCA DE ESTE <span class="highlight">PORTAFOLIO</span></h3>
+
+    <div class="text-section">
+        <h2 class="section-title">Nuestro Equipo <span class="highlight"></span></h2>
+        <p class="section-text">
+            Somos un grupo de programadores principiantes apasionados por la tecnologia
+            queremos compartir con ustedes nuestros conocimientos y proyectos realizados
+            con la finalidad de que puedan observar nuestros avances y puedan tomarlo como
+            ejemplo para sus futuros proyectos, siempre con la finalidad de mejorar.
+        </p>
+    </div>
+
+    <div class="text-section">
+        <h2 class="section-title">Apartado de <span class="highlight">Comentarios</span></h2>
+        <p class="section-text">
+            En este portafolio usted podra dejar un comentario acerca de un proyecto determinado
+            a fin de verificar nuestros conocimientos adquiridos y poder dejarnos su opinion, lo que
+            mas apreciamos es su opinion para poder mejorar.
+        </p>
+    </div>
+
+    <div class="text-section">
+        <h2 class="section-title">Apartado de <span class="highlight">Proyectos</span></h2>
+        <p class="section-text">
+            En este apartado podra observar los proyectos realizados por nuestro equipo,
+            cada uno de ellos con una descripcion detallada de lo que se realizo a fin de
+            que pueda observar el trabajo realizado por nuestro equipo.
+        </p>
+    </div>
+</h:body>
+
+</html>
